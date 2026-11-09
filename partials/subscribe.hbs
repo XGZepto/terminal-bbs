@@ -1,0 +1,15 @@
+{{#if @site.members_enabled}}{{#unless @member}}{{#unless @site.members_invite_only}}
+<section class="sub" id="subscribe" aria-labelledby="sub-h" data-member-scope>
+    <h2 class="sub-h" id="sub-h"><span class="or">#</span> 訂閱 subscribe</h2>
+{{#if @site.paid_members_enabled}}<p>{{> signup class="sub-go" label="[ subscribe ]"}}</p>{{else if @site.portal_signup_checkbox_required}}<p>{{> signup class="sub-go" label="[ subscribe ]"}}</p>{{else if @site.allow_self_signup}}
+    <form class="sub-form" data-member-form="subscribe" novalidate>
+        <label for="sub-email"><span class="ps">$</span> subscribe --email</label>
+        <input id="sub-email" type="email" data-member-email placeholder="you@example.com" autocomplete="email" autocapitalize="off" spellcheck="false">
+        <button type="submit"><span class="go-idle">[ Enter ]</span><span class="go-busy">sending<span class="cur" aria-hidden="true"></span></span></button>
+    </form>
+    <p class="dim small note note-default">New posts by email.</p>
+    <p class="small note note-success" aria-live="polite">✓ 確認信已寄到 <span data-member-echo></span>，點擊信中連結即完成訂閱。 Check your inbox to confirm.</p>
+    <p class="small note note-error" data-member-error data-invalid="請輸入有效的電郵 · enter a valid email address." data-fallback="寄不出去，請再試一次 · that didn’t work, try again." aria-live="assertive"></p>
+    {{else}}<p>{{> signup class="sub-go" label="[ subscribe ]"}}</p>{{/if}}
+</section>
+{{/unless}}{{/unless}}{{/if}}

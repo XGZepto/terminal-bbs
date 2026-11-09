@@ -1,0 +1,104 @@
+{
+  "name": "terminal-bbs",
+  "description": "A Ghost theme in the style of a telnet-era Chinese BBS: a numbered board, keyboard navigation, images that arrive as a dithered scan, and posts that switch between 中文 and English.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Zepto Zhou",
+    "email": "xgzepto@gmail.com",
+    "url": "https://zepto.page"
+  },
+  "homepage": "https://github.com/XGZepto/terminal-bbs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XGZepto/terminal-bbs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/XGZepto/terminal-bbs/issues"
+  },
+  "engines": {
+    "ghost": ">=6.0.0"
+  },
+  "keywords": [
+    "ghost-theme",
+    "ghost",
+    "theme",
+    "blog",
+    "bilingual",
+    "chinese"
+  ],
+  "screenshots": {
+    "desktop": "assets/screenshot-desktop.jpg",
+    "mobile": "assets/screenshot-mobile.jpg"
+  },
+  "config": {
+    "posts_per_page": 20,
+    "image_sizes": {
+      "s": {
+        "width": 480
+      },
+      "m": {
+        "width": 800
+      },
+      "l": {
+        "width": 1200
+      },
+      "xl": {
+        "width": 1600
+      }
+    },
+    "card_assets": true,
+    "custom": {
+      "phosphor": {
+        "type": "select",
+        "options": [
+          "Grey",
+          "Amber",
+          "Green"
+        ],
+        "default": "Grey",
+        "description": "Colour of the text on screen."
+      },
+      "banner": {
+        "type": "select",
+        "options": [
+          "Logo as text blocks",
+          "Site title"
+        ],
+        "default": "Logo as text blocks",
+        "group": "homepage",
+        "description": "The home page banner: your logo redrawn in block characters, or the site title."
+      },
+      "boot_sequence": {
+        "type": "boolean",
+        "default": true,
+        "group": "homepage",
+        "description": "Print a short connection log on the first visit of a session."
+      },
+      "develop_images": {
+        "type": "boolean",
+        "default": true,
+        "group": "post",
+        "description": "Images arrive as a dithered scan and develop as they scroll into view."
+      },
+      "default_language": {
+        "type": "select",
+        "options": [
+          "Reader's browser",
+          "中文",
+          "English"
+        ],
+        "default": "Reader's browser",
+        "group": "post",
+        "description": "Which half a #bilingual post opens on."
+      }
+    }
+  },
+  "scripts": {
+    "test": "gscan .",
+    "zip": "node scripts/zip.mjs"
+  },
+  "devDependencies": {
+    "gscan": "^6.7.0"
+  }
+}

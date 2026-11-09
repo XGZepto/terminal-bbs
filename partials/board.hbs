@@ -1,0 +1,19 @@
+{{!-- The article list. Row numbers count down from the newest post (filled in by main.js). --}}
+<section class="board" aria-label="Posts" data-total="{{pagination.total}}" data-page="{{pagination.page}}" data-limit="{{pagination.limit}}">
+    <div class="row row-head" aria-hidden="true"><span></span><span class="c-n">#</span><span class="c-d">日 期</span><span class="c-t">文 章 標 題</span><span class="c-l">語言</span><span class="c-m">長度</span></div>
+    <div class="rows">
+        {{#foreach posts}}
+            <a class="row" href="{{url}}">
+                <span class="c-cur" aria-hidden="true">▸</span>
+                <span class="c-n" data-n></span>
+                <span class="c-d">{{date format="YYYY/MM/DD"}}</span>
+                <span class="c-t" data-detect-lang>{{title}}</span>
+                <span class="c-l">{{#has tag="#bilingual"}}<span class="l-bi">雙語</span>{{else}}<span class="l-en" data-lang-label>EN</span>{{/has}}</span>
+                <span class="c-m">{{reading_time minute="1 min" minutes="% min"}}</span>
+                <span class="row-x" hidden>{{excerpt characters="220"}}</span>
+            </a>
+        {{/foreach}}
+    </div>
+    <div class="preview" aria-live="polite" data-preview></div>
+    {{pagination}}
+</section>

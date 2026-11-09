@@ -1,0 +1,9 @@
+{{!< default}}
+{{#tag}}
+<header class="list-head">
+    <p class="cmd"><span class="ps">guest@bbs</span><span class="dim">:~$</span> ls tag/{{slug}}</p>
+    <h1 class="title"><span class="or" aria-hidden="true"># </span>{{name}}</h1>
+    {{#if description}}<p class="dek">{{description}}</p>{{/if}}
+</header>
+{{/tag}}
+{{> board}}

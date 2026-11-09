@@ -1,0 +1,20 @@
+{{!< default}}
+{{#is "home"}}{{#unless pagination.prev}}
+<section class="hero{{#unless @site.cover_image}} hero-plain{{/unless}}" aria-label="{{@site.title}}"{{#if @site.cover_image}} data-cover="{{img_url @site.cover_image size="l"}}"{{/if}}>
+    {{#if @site.cover_image}}
+        <canvas class="hero-bg" aria-hidden="true"></canvas>
+        <div class="hero-label" aria-hidden="true"><span>cover</span><span>bayer 4×4</span></div>
+    {{/if}}
+    {{#if @custom.boot_sequence}}<pre class="boot" aria-hidden="true" data-boot></pre>{{/if}}
+    <div class="win">
+        <h1 class="hero-title"{{#match @custom.banner "Logo as text blocks"}}{{#if @site.logo}} data-banner="{{img_url @site.logo size="s"}}"{{/if}}{{/match}}>{{@site.title}}</h1>
+        {{#if @site.description}}
+            <p class="cmd"><span class="ps">guest@bbs</span><span class="dim">:~$</span> cat motto.txt</p>
+            <p class="motto" data-detect-lang>{{@site.description}}<span class="cur" aria-hidden="true"></span></p>
+        {{/if}}
+        <p class="dim small">{{pagination.total}} posts · {{@site.url}}</p>
+    </div>
+</section>
+{{/unless}}{{/is}}
+{{> board}}
+{{> subscribe}}

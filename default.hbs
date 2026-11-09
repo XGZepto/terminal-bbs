@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>{{meta_title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Chiron+Hei+HK:ital,wght@1,400&display=swap">
+    <link rel="stylesheet" href="{{asset "css/screen.css"}}">
+    {{ghost_head exclude="search"}}
+</head>
+<body class="{{body_class}} phosphor-{{#match @custom.phosphor "Amber"}}amber{{else match @custom.phosphor "Green"}}green{{else}}grey{{/match}}" data-default-lang="{{@custom.default_language}}" data-timezone="{{@site.timezone}}"{{#if @custom.develop_images}} data-develop{{/if}}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {{> top-bar}}
+    <main id="main" class="screen-wrap">
+        {{{body}}}
+    </main>
+    {{> fn-bar}}
+    {{> search}}
+    {{> member}}
+    <script src="{{asset "js/search.js"}}" defer></script>
+    <script src="{{asset "js/members.js"}}" defer></script>
+    <script src="{{asset "js/main.js"}}" defer></script>
+    {{ghost_foot}}
+</body>
+</html>

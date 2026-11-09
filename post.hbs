@@ -1,0 +1,51 @@
+{{!< default}}
+{{#post}}
+<article class="{{post_class}} post-wrap"{{#has tag="#zh-hans"}} lang="zh-Hans"{{/has}}>
+    <div class="head">
+        <div><span class="kv"><span class="k">作者</span><span class="v">{{#foreach authors}}{{name}}{{#unless @last}}, {{/unless}}{{/foreach}}</span></span><span class="kv kv-s"><span class="k">看板</span><span class="v">{{@site.title}}</span></span></div>
+        <div><span class="k">時間</span><span class="v"><time datetime="{{date format="YYYY-MM-DDTHH:mm"}}">{{date format="ddd MMM DD HH:mm YYYY"}}</time></span></div>
+        <div><span class="k">長度</span><span class="v" data-reading-time>{{reading_time minute="1 min" minutes="% min"}}</span></div>
+    </div>
+    <h1 class="title" data-detect-lang><span class="or" aria-hidden="true"># </span>{{title}}</h1>
+    {{#if custom_excerpt}}<p class="dek" data-detect-lang>{{custom_excerpt}}</p>{{/if}}
+    {{#has tag="#bilingual"}}
+        <div class="lang" role="group" aria-label="Language 語言" hidden>
+            <button type="button" data-setlang="zh"><kbd>1</kbd>中文</button>
+            <button type="button" data-setlang="en"><kbd>2</kbd>English</button>
+        </div>
+    {{/has}}
+    {{#if feature_image}}
+        <figure class="fig feature">
+            <div class="figbar"><span>fig.0 feature</span><span data-stat></span></div>
+            <div class="imgwrap">
+                <img
+                    srcset="{{img_url feature_image size="m"}} 800w, {{img_url feature_image size="l"}} 1200w, {{img_url feature_image size="xl"}} 1600w"
+                    sizes="(max-width: 860px) 92vw, 790px"
+                    src="{{img_url feature_image size="l"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
+            </div>
+            {{#if feature_image_caption}}<figcaption>{{feature_image_caption}}</figcaption>{{/if}}
+        </figure>
+    {{/if}}
+    <section class="gh-content"{{#has tag="#bilingual"}} data-bilingual{{/has}}>
+        {{content}}
+    </section>
+    <div class="sig">
+        <p>--</p>
+        <p class="gr">※ 發信站: {{@site.title}} ({{@site.url}})</p>
+        <p class="gr">※ 文章網址: <a href="{{url absolute="true"}}">{{url absolute="true"}}</a></p>
+    </div>
+    {{#if comments}}
+        <section class="push" aria-label="Comments">
+            <h2 class="push-h">── 推文 comments ──</h2>
+            {{comments mode="dark" title=" " count=true}}
+        </section>
+    {{/if}}
+    <nav class="nb" aria-label="More posts">
+        {{#prev_post}}<a href="{{url}}"><span class="dim">[←] 較早</span> <span data-detect-lang>{{title}}</span></a>{{else}}<span></span>{{/prev_post}}
+        {{#next_post}}<a href="{{url}}"><span class="dim">[→] 較新</span> <span data-detect-lang>{{title}}</span></a>{{else}}<span class="dim">[→] 較新 — 這是最新一篇</span>{{/next_post}}
+    </nav>
+    <div class="pager"><span class="more" data-more>--More--</span><span class="dim">{{#has tag="#bilingual"}}<span class="keys"><kbd>1</kbd><kbd>2</kbd> 中/EN</span> {{/has}}<a class="back" href="{{@site.url}}"><kbd>q</kbd> 返回看板</a></span></div>
+</article>
+{{/post}}
+{{> subscribe}}

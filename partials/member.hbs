@@ -1,0 +1,70 @@
+{{!-- Sign-in and subscribe, run by members.js. A telnet-style login window. --}}
+{{#if @site.members_enabled}}
+{{#unless @member}}
+<div class="member" data-member-panel data-signup="{{#if @site.members_invite_only}}none{{else if @site.paid_members_enabled}}portal{{else if @site.portal_signup_checkbox_required}}portal{{else if @site.allow_self_signup}}theme{{else}}portal{{/if}}" data-mode="signin" hidden>
+    <div class="member-backdrop" data-member-close></div>
+    <section class="member-box" role="dialog" aria-modal="true" aria-labelledby="member-title">
+        <header class="member-bar">
+            <h2 class="member-title" id="member-title"><span data-for-mode="signin">登入 login</span><span data-for-mode="signup" hidden>註冊 new</span></h2>
+            <span class="member-host" aria-hidden="true">telnet {{@site.url}}</span>
+            <button type="button" class="member-x" data-member-close aria-label="Close">[x]</button>
+        </header>
+
+        <form class="member-form" data-member-form="signin" data-member-scope novalidate>
+            <div class="member-ask">
+                <p class="member-hi">歡迎光臨 <b>{{@site.title}}</b>。</p>
+                <p class="dim">輸入電郵，我們會寄一條登入連結給你。<br>Enter your email and we’ll send you a sign-in link.</p>
+                <p class="member-field">
+                    <label for="member-signin-email">login:</label>
+                    <input id="member-signin-email" type="email" data-member-email autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com">
+                </p>
+                <p class="member-error small" data-member-error data-invalid="請輸入有效的電郵 · enter a valid email address." data-fallback="寄不出去，請再試一次 · that didn’t work, try again." aria-live="assertive"></p>
+                <div class="member-acts">
+                    <button type="submit" class="member-go"><span class="go-idle">[ Enter 寄出連結 ]</span><span class="go-busy">寄出中 sending<span class="cur" aria-hidden="true"></span></span></button>
+                    {{#unless @site.members_invite_only}}<span class="member-switch dim">沒有帳號？{{> signup label="new → 訂閱" switch=true}}</span>{{/unless}}
+                </div>
+            </div>
+            <div class="member-sent" aria-live="polite">
+                <p class="dim">&gt; mail --to <span data-member-echo></span></p>
+                <p class="gr">✓ 連結已寄出 · link sent.</p>
+                <p>請到郵箱打開連結登入，也看看垃圾郵件。<br>Open the link in your inbox to sign in. Check spam if it isn’t there.</p>
+                <div class="member-acts"><button type="button" class="member-go" data-member-close data-member-done>[ 好 ok ]</button></div>
+            </div>
+        </form>
+
+        <form class="member-form" data-member-form="signup" data-member-scope novalidate hidden>
+            <div class="member-ask">
+                <p class="member-hi">訂閱 <b>{{@site.title}}</b>：新文章會寄到你的郵箱。</p>
+                <p class="dim">免費，隨時退訂。<br>New posts by email. Free; unsubscribe anytime.</p>
+                <p class="member-field">
+                    <label for="member-signup-name">name:</label>
+                    <input id="member-signup-name" type="text" data-member-name autocomplete="name" placeholder="(可留空 optional)">
+                </p>
+                <p class="member-field">
+                    <label for="member-signup-email">email:</label>
+                    <input id="member-signup-email" type="email" data-member-email autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="you@example.com">
+                </p>
+                <p class="member-error small" data-member-error data-invalid="請輸入有效的電郵 · enter a valid email address." data-fallback="寄不出去，請再試一次 · that didn’t work, try again." aria-live="assertive"></p>
+                {{#if @site.portal_signup_terms_html}}<div class="member-terms">{{{@site.portal_signup_terms_html}}}</div>{{/if}}
+                <div class="member-acts">
+                    <button type="submit" class="member-go"><span class="go-idle">[ Enter 訂閱 ]</span><span class="go-busy">寄出中 sending<span class="cur" aria-hidden="true"></span></span></button>
+                    <span class="member-switch dim">已有帳號？<button type="button" data-member-mode="signin">login → 登入</button></span>
+                </div>
+            </div>
+            <div class="member-sent" aria-live="polite">
+                <p class="dim">&gt; subscribe --email <span data-member-echo></span></p>
+                <p class="gr">✓ 確認信已寄出 · check your inbox.</p>
+                <p>點擊信中的連結即完成訂閱。<br>Click the link in the email to confirm.</p>
+                <div class="member-acts"><button type="button" class="member-go" data-member-close data-member-done>[ 好 ok ]</button></div>
+            </div>
+        </form>
+    </section>
+</div>
+{{/unless}}
+<div class="member-note" data-member-note role="status" hidden>
+    <p data-note="signin"><b>★ 系統訊息</b> 登入成功{{#if @member.firstname}}，歡迎回來 {{@member.firstname}}{{/if}}。 Signed in — welcome back.</p>
+    <p data-note="signup"><b>★ 系統訊息</b> 訂閱成功，新文章會寄給你。 You’re subscribed.</p>
+    <p data-note="fail"><b>✗ 系統訊息</b> 這條連結已失效。 That link has expired or was already used.{{#unless @member}} <button type="button" data-member="signin" data-note-close>再寄一次 send a new one</button>{{/unless}}</p>
+    <button type="button" class="member-note-x" data-note-close aria-label="Dismiss">[x]</button>
+</div>
+{{/if}}

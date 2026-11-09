@@ -1,0 +1,18 @@
+<header class="top">
+    <div class="top-in">
+        <a class="top-brand" href="{{@site.url}}"><span class="sq" aria-hidden="true"></span>{{@site.title}}</a>
+        <nav class="top-nav" aria-label="Main">
+            {{navigation}}
+            <button class="top-btn" type="button" data-search aria-haspopup="dialog"><span class="keys">[/] </span>search</button>
+            {{#if @site.members_enabled}}
+                {{#if @member}}
+                    <a href="#/portal/account" data-portal="account">account</a>
+                {{else}}
+                    <a href="#/portal/signin" data-member="signin" aria-haspopup="dialog">sign in</a>
+                    {{> signup label="subscribe"}}
+                {{/if}}
+            {{/if}}
+        </nav>
+        <span class="clock" data-clock aria-hidden="true"></span>
+    </div>
+</header>

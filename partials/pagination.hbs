@@ -1,0 +1,7 @@
+{{#match pagination.pages ">" 1}}
+<nav class="pager-nav" aria-label="Pages">
+    {{#if pagination.prev}}<a href="{{page_url pagination.prev}}">[←] 較新 newer</a>{{else}}<span></span>{{/if}}
+    <span class="dim">第 {{pagination.page}}/{{pagination.pages}} 頁</span>
+    {{#if pagination.next}}<a href="{{page_url pagination.next}}">較早 older [→]</a>{{else}}<span></span>{{/if}}
+</nav>
+{{/match}}
